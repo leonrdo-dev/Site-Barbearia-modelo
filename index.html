@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borba's</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div class="layout">
+
+       <header >
+    <img src="img/B.png" alt="Logo_Barbearia">
+    <h1>Borbas' Barbearia</h1>
+
+    <button class="menu-hamburger" id="menuBtn" aria-label="Abrir Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav id="navMenu">
+        <ul>
+            <li><a href="#Home">Home</a></li>
+            <li><a href="#serv">Serviços</a></li>
+            <li><a href="#cont">Contatos</a></li>
+            <li><a href="#loc">Localização</a></li>
+        </ul>
+    </nav>
+</header>
+
+        <main>
+            <section class="verdade" id="Home">
+                <div class="text-verdade">
+                    <p>Mais que um corte</p>
+                    <p>Um <span>legado.</span></p>
+                </div>
+                <img src="img/pexels-alexandre-saraiva-carniato-583650-5812313.jpg" alt="Barbeiro">
+            </section>
+
+            <section class="servicos" id="serv">
+                <h4>Nossos Serviços</h4>
+                <div class="grade_produtos">
+                    <div class="produto">
+                        <img src="img/visagismo.jpg" alt="visagismo">
+                        <h5>Visagismo</h5>
+                        <p>Visagismo personalizado especialmente para você</p>
+                        <p>Por quem sabe como te deixar bonito</p>
+                    </div>
+                    <div class="produto">
+                        <img src="img/masculino.jpg" alt="corte de cabelo masculino">
+                        <h5>Cabelo</h5>
+                        <p>Corte de cabelo</p>
+                        <p>Clássico e sempre elegante</p>
+                    </div>
+                    <div class="produto">
+                        <img src="img/barba.jpg" alt="visagismo">
+                        <h5>Barba</h5>
+                        <p>Serviço completo em barba e bigode</p>
+                        <p>Pois quem tem sabe do cuidado</p>
+                    </div>
+                    <div class="produto">
+                        <img src="img/infanitl.jpg" alt="visagismo">
+                        <h5>Infantil</h5>
+                        <p>Corte Infantil</p>
+                        <p>Para seu filho ficar tão elegante quanto o pai</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contato" id="cont">
+                <div>
+                    <h4>Nossos contatos</h4>
+                    <p>Não fique de fora.</p>
+                </div>
+                <div>
+                    
+                    <button><a href="https://web.whatsapp.com/" target="_blank"><img src="img/whatsapp--v2.png" alt="Whatsapp"> Agende agora!</a></button>
+                    <button><a href="https://www.instagram.com/" class="fotoinsta" target="_blank"><img src="img/icons8-insta-30.png" alt="Instagram"> Acompanhe nosso trabalho</a></button>
+                </div>
+            </section>
+
+            <section class="localizacao" id="loc">
+                <h4>Nossa localização</h4>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2986.525931470807!2d-48.85567742530657!3d-26.25386926599721!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94deafa4c5bcc777%3A0x38e98c600be478f4!2sGarten%20Shopping!5e1!3m2!1spt-BR!2sbr!4v1781056325024!5m2!1spt-BR!2sbr"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </section>
+        </main>
+
+        <footer>
+            <p>Copyright © 2026 Borbas' Barberia. Todos os direitos reservados.</p>
+        </footer>
+
+        <!-- BOTÃO FIXO DO WHATSAPP COM EFEITO DE PULSO -->
+        <a href="https://wa.me/SEUNUMERO" class="whatsapp-flutuante" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 32 32" class="whatsapp-icone">
+                <path
+                    d="M16 2a13 13 0 0 0-11.3 19.4L3 29l7.8-2A13 13 0 1 0 16 2zm6.8 18.2c-.3.8-1.7 1.5-2.4 1.6-.6.1-1.4.2-4.3-.9-3.6-1.5-6-5.2-6.1-5.4-.1-.2-1.2-1.7-1.2-3.2 0-1.5.8-2.2 1.1-2.5.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5.2.6.8 2 .9 2.2.1.2.1.4-.1.6-.1.2-.3.5-.5.7-.2.2-.4.4-.2.7.3.5.9 1.6 1.8 2.4.9.9 2 1.4 2.5 1.6.4.2.7.2.9-.1.3-.3.9-1.1 1.2-1.5.2-.3.5-.3.8-.2.3.1 2 1 2.3 1.2.3.1.6.2.7.3.1.2.1 1-.2 1.8z"
+                    fill="#fff" />
+            </svg>
+        </a>
+
+    </div>
+<script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navMenu = document.getElementById('navMenu');
+    const menuLinks = document.querySelectorAll('#navMenu a');
+
+    menuBtn.addEventListener('click', () => {
+        menuBtn.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            menuBtn.classList.remove('active');
+            navMenu.classList.remove('active');
+        });
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,694 @@
+/* ==========================================================================
+   1. CONFIGURAÇÕES GERAIS E VARIÁVEIS (DESIGN SYSTEM)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Montserrat:wght@300;400;600;700&display=swap');
+
+:root {
+    /* Paleta de Cores Premium (Dark Luxury) */
+    --bg-principal: #0a0a0c;
+    --bg-secundario: #121214;
+    --cor-ouro: #d4af37;
+    --cor-ouro-rgb: 212, 175, 55;
+    --cor-ouro-claro: #f3e5ab;
+    --texto-claro: #f5f5f7;
+    --texto-escuro: #8e8e93;
+    --vidro: rgba(18, 18, 20, 0.75);
+    --borda-vidro: rgba(212, 175, 55, 0.15);
+
+    /* Tipografia Dinâmica (Adapta ao tamanho da tela sem Media Queries) */
+    --fonte-titulo: 'Cinzel', serif;
+    --fonte-corpo: 'Montserrat', sans-serif;
+    --f-titulo-g: clamp(2.5rem, 6vw, 4.5rem);
+    --f-titulo-m: clamp(1.8rem, 4vw, 2.5rem);
+    --f-corpo: clamp(0.95rem, 1.5vw, 1.1rem);
+
+    /* Transições e Efeitos */
+    --transicao-suave: cubic-bezier(0.4, 0, 0.2, 1);
+    --sombra-premium: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Reset Avançado */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-principal);
+    color: var(--texto-claro);
+    font-family: var(--fonte-corpo);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+
+    /* AS DUAS LINHAS CRÍTICAS AQUI: */
+    overflow-x: hidden;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Custom Scrollbar (Barra de rolagem personalizada) */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-principal);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--cor-ouro);
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   2. LAYOUT E ESTRUTURA ESTRUTURAL
+   ========================================================================== */
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    /* ISSO GARANTE QUE O SITE NÃO ESTIQUE PARA OS LADOS: */
+    overflow-x: hidden;
+    width: 100%;
+}
+
+section {
+    padding: 100px max(4vw, 20px);
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Títulos de Seções Padronizados */
+section h4 {
+    font-family: var(--fonte-titulo);
+    font-size: var(--f-titulo-m);
+    color: var(--cor-ouro);
+    text-align: center;
+    margin-bottom: 60px;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+section h4::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: var(--cor-ouro);
+    margin: 15px auto 0;
+}
+
+/* ==========================================================================
+   3. HEADER / NAVEGAÇÃO (CORRIGIDO PARA ACOMPANHAR A TELA)
+   ========================================================================== */
+header {
+    position: fixed; /* Mudado de sticky para fixed para flutuar sobre o feed */
+    top: 0;
+    left: 0;         /* Garante que ele comece do canto esquerdo */
+    width: 100%;     /* Ocupa a largura total da tela */
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px max(4vw, 20px);
+    background: var(--vidro);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--borda-vidro);
+    box-shadow: var(--sombra-premium);
+}
+
+header img {
+    height: 60px;
+    filter: drop-shadow(0 0 8px rgba(var(--cor-ouro-rgb), 0.3));
+    transition: transform var(--transicao-suave) 0.4s;
+}
+
+header img:hover {
+    transform: rotate(15px) scale(1.05);
+}
+
+header h1 {
+    font-family: var(--fonte-titulo);
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: linear-gradient(45deg, #fff, var(--cor-ouro));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+nav ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+nav a {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    position: relative;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--cor-ouro);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s var(--transicao-suave);
+}
+
+nav a:hover {
+    color: var(--cor-ouro);
+}
+
+nav a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* ==========================================================================
+   4. HERO SECTION (Seção "Verdade" - Cinematográfica)
+   ========================================================================== */
+.verdade {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 40px;
+    align-items: center;
+    min-height: calc(85vh - 100px);
+    padding-top: 40px;
+    margin-top: 125px;
+}
+
+.text-verdade p:first-child {
+    /* "Mais que um corte" - Ficou maior e com mais presença */
+    font-size: clamp(1.4rem, 2.5vw, 2rem); 
+    text-transform: uppercase;
+    letter-spacing: 5px; /* Aumentei de 4px para 5px para acompanhar o tamanho */
+    color: var(--texto-escuro);
+    margin-bottom: 15px; /* Mais respiro entre os textos */
+}
+
+.text-verdade p:nth-child(2) {
+    /* "Um legado." - Agora gigante, agressivo e cinematográfico */
+    font-family: var(--fonte-titulo);
+    
+    /* Substituído a variável por controle direto e proporcional: */
+    /* Mínimo de 3.2rem (celular) | Crescimento fluido | Máximo de 5.5rem (telas grandes) */
+    font-size: clamp(3.2rem, 7vw, 5.5rem); 
+    
+    line-height: 1.05; /* Gruda um pouquinho mais as linhas para ficar bem premium */
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.text-verdade span {
+    color: var(--cor-ouro);
+    display: block;
+    text-shadow: 0 0 30px rgba(var(--cor-ouro-rgb), 0.3);
+}
+
+/* Moldura e Mascaramento de Imagem Avançado */
+.verdade img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: var(--sombra-premium);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    /* Efeito de revelação gradual nas bordas */
+    mask-image: linear-gradient(to bottom, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent);
+}
+
+/* ==========================================================================
+   5. SEÇÃO SERVIÇOS (Grid Assimétrico Reativo)
+   ========================================================================== */
+.servicos {
+    padding-top: 45px;
+    background-color: var(--bg-secundario);
+    max-width: 100%;
+    /* Ocupa largura total na transição de cor */
+}
+
+.grade_produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.produto {
+    background: var(--bg-principal);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
+    padding: 25px;
+    transition: transform 0.4s var(--transicao-suave), border-color 0.4s, box-shadow 0.4s;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito Glow Invisível que acende no Hover */
+.produto::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(800px circle at var(--x, 0px) var(--y, 0px), rgba(var(--cor-ouro-rgb), 0.06), transparent 40%);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.produto:hover::before {
+    opacity: 1;
+}
+
+.produto:hover {
+    transform: translateY(-10px);
+    border-color: rgba(var(--cor-ouro-rgb), 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(var(--cor-ouro-rgb), 0.05);
+}
+
+.produto img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    transition: transform 0.5s var(--transicao-suave);
+}
+
+.produto:hover img {
+    transform: scale(1.04);
+}
+
+.produto h5 {
+    font-family: var(--fonte-titulo);
+    font-size: 1.4rem;
+    color: var(--texto-claro);
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.produto p:nth-of-type(1) {
+    color: var(--texto-claro);
+    font-size: 0.95rem;
+    font-weight: 400;
+    margin-bottom: 6px;
+}
+
+.produto p:nth-of-type(2) {
+    color: var(--cor-ouro);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: auto;
+    /* Joga para o fim do card uniformemente */
+}
+
+
+/* ==========================================================================
+   6. SEÇÃO CONTATO (Botoes Customizados WhatsApp & Instagram)
+   ========================================================================== */
+.contato {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    background: linear-gradient(135deg, var(--bg-principal), #161619);
+    border-radius: 8px;
+    border: 1px solid var(--borda-vidro);
+    margin: 80px auto;
+    padding: 60px max(6vw, 40px);
+    box-shadow: var(--sombra-premium);
+}
+
+.contato h4 {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.contato h4::after {
+    margin: 10px 0 0 0;
+}
+
+.contato p {
+    color: var(--texto-escuro);
+    font-size: var(--f-corpo);
+}
+
+.contato div:nth-child(2) {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Base de alta performance para os botões sociais */
+.contato button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    perspective: 1000px;
+    /* Cria efeito de profundidade */
+}
+
+.contato button a {
+    display: inline-block;
+    padding: 16px 35px;
+    font-family: var(--fonte-corpo);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 6px;
+    color: #ffffff;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Animação "Pop" elástica */
+    position: relative;
+    z-index: 2;
+}
+
+/* ----- BOTÃO WHATSAPP (Verde Premium) ----- */
+.contato button:first-child a {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.25);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.contato img{
+    height: 20px;
+    width: auto;
+}
+
+.fotoinsta img{
+    height: 23px;
+    width: auto;
+}
+
+.contato button:first-child a:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(37, 211, 102, 0.45);
+    filter: brightness(1.1);
+}
+
+/* ----- BOTÃO INSTAGRAM (Gradiente Luxo Sunset) ----- */
+.contato button:last-child a {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    box-shadow: 0 4px 20px rgba(220, 39, 67, 0.25);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+     display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.contato button:last-child a:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(220, 39, 67, 0.45);
+    filter: brightness(1.15);
+}
+
+/* ==========================================================================
+   7. LOCALIZAÇÃO (Tratamento de Iframe Obscuro)
+   ========================================================================== */
+.localizacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 15px;
+}
+
+.localizacao iframe {
+    width: 100% !important;
+    max-width: 1000px;
+    height: 400px !important;
+    border-radius: 6px !important;
+    box-shadow: var(--sombra-premium);
+    border: 1px solid rgba(214, 175, 55, 0.2) !important;
+}
+
+/* ==========================================================================
+   8. FOOTER (Fim de Página Elegante)
+   ========================================================================== */
+footer {
+    background-color: #050506;
+    padding: 30px 20px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.02);
+    margin-top: auto;
+}
+
+footer p {
+    font-size: 0.85rem;
+    color: var(--texto-escuro);
+    letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   9. MEDIA QUERIES AVANÇADAS (REORGANIZADO E LIMPO)
+   ========================================================================== */
+@media (max-width: 968px) {
+    /* HERO SECTION */
+    .verdade {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 50px;
+    }
+
+    .verdade img {
+        height: 350px;
+        order: -1; /* Imagem vai para o topo no mobile */
+    }
+
+    /* SEÇÃO CONTATO */
+    .contato {
+        flex-direction: column;
+        text-align: center;
+
+    }
+    .contato button:first-child a {
+
+        display: flex;
+        align-items: center;
+        place-items: center;
+        justify-content: center;
+        gap: 15px;
+
+    }
+    
+
+    .contato h4 {
+        text-align: center;
+    }
+
+    .contato h4::after {
+        margin: 10px auto 0;
+    }
+
+    .contato div:nth-child(2) {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .contato button,
+    .contato button a {
+        width: 100%;
+    }
+}
+
+/* ==========================================================================
+   10. BOTÃO FIXO DO WHATSAPP (PRESERVADO)
+   ========================================================================== */
+.whatsapp-flutuante {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 65px;
+    height: 65px;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+    z-index: 9999;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.whatsapp-icone {
+    width: 35px;
+    height: 35px;
+}
+
+.whatsapp-flutuante::before,
+.whatsapp-flutuante::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #25D366;
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.6;
+    animation: pulsarOnda 2.5s infinite linear;
+}
+
+.whatsapp-flutuante::after {
+    animation-delay: 1.25s;
+}
+
+.whatsapp-flutuante:hover {
+    transform: scale(1.1) rotate(10deg);
+}
+
+@keyframes pulsarOnda {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+@media (max-width: 480px) {
+    .whatsapp-flutuante {
+        bottom: 20px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+    }
+    .whatsapp-icone {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* ==========================================================================
+   11. CONTROLES DO MENU HAMBÚRGUER (VERSÃO FINAL COMPACTA)
+   ========================================================================== */
+.menu-hamburger {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    padding: 0;
+    z-index: 1010;
+    flex-shrink: 0;
+}
+
+.menu-hamburger span {
+    width: 100%;
+    height: 3px;
+    background-color: var(--cor-ouro);
+    border-radius: 4px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Regras Mobile unificadas para o Menu */
+@media (max-width: 968px) {
+    header {
+        flex-direction: row !important; 
+        justify-content: space-between !important;
+        padding: 15px max(4vw, 20px);
+    }
+
+    header img {
+        height: 50px;
+    }
+
+    header h1 {
+        font-size: clamp(1rem, 4vw, 1.8rem);
+        white-space: nowrap;
+    }
+
+    .menu-hamburger {
+        display: flex;
+        position: relative;
+    }
+
+    .menu-hamburger.active {
+        position: fixed;
+        top: 30px;
+        right: max(4vw, 20px);
+    }
+
+    header nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 75%;
+        max-width: 320px;
+        height: 100vh;
+        background: rgba(10, 10, 12, 0.98);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        border-left: 1px solid var(--borda-vidro);
+        padding: 140px 40px 40px 40px;
+        z-index: 1005;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.77, 0.2, 0.05, 1);
+    }
+
+    header nav.active {
+        transform: translateX(0);
+    }
+
+    header nav ul {
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+        align-items: flex-start;
+        list-style: none;
+        width: 100%;
+    }
+
+    header nav a {
+        font-size: 1.3rem;
+        font-family: var(--fonte-titulo);
+        display: block;
+        width: 100%;
+    }
+
+    /* Animação do X */
+    .menu-hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .menu-hamburger.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
+    .menu-hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+}
